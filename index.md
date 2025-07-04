@@ -10,23 +10,23 @@ We find that both cuts are quite robust to various choices made and can produce 
 
 
 ## Introduction 
-The Rubin ComCam observing campaign undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 galaxy cluster, an intermediate mass cluster (quote mass + ref) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. 
+The Rubin ComCam observing campaign undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 galaxy cluster, an intermediate mass cluster ($M_{\rm 500c} \sim 6 \times 10^{14}\ M_{\odot}$, e.g. {cite:p} `Planck15`) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. 
 In order to best measure the shear profile of the cluster, we would ideally only measure the shapes of galaxies that are lensed by the cluster, i.e. source galaxies that are behind the cluster. This can be done by identifying and removing cluster members via the red sequence, an overdensity on a color-magnitude diagram caused by the cluster members, or by removing objects near and below the redshift of the cluster. This TechNote goes over both methods to define the source selection of galaxies used to measure the shear profile. We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
 
 
 ## Dataset
-The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band. {cite:p}`DMTN-242`
-The DP1 catalog includes various flux measurements including cModel and gaap along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
-The HSM resolution factor, defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, can be calculated from the catalog.
+The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band. 
+The DP1 catalog includes various flux measurements including cModel and gaap **Add reference for the model?** along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
+The HSM resolution factor, defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, can be calculated from the catalog.**Explain what it is? Or remove from this section if it's too technical**
 Photometric redshift estimates are not included in the DP1 catalog but have been created as outlined in {cite:p}`SITCOMTN-154`.
-Similarly, details on PSF and photometric calibration are located in {cite:p}`SITCOMTN-161` and photometric calibration technote . We will focus on the various cuts made to generate the cluster lensing sample for Abell 360. 
+Similarly, details on PSF and photometric calibration are located in {cite:p}`SITCOMTN-161` and photometric calibration technote . Here, we will focus on the various cuts made to generate the cluster lensing sample for Abell 360. 
 
 ```{note}
 Photometric calibration technote is still in draft and has not been made on SITCOM yet
 ```
 
 
-We apply basic quality flags to remove objects that have caused a failure in the flux measurements, namely from saturation, cosmic rays, and spurious detections.
+First, we apply basic quality flags to remove objects that have caused a failure in the flux measurements, namely from saturation, cosmic rays, and spurious detections.
 Each quality flag is a boolean which is set to True if the algorithm fails.
 The flags and number of objects affected by the flag are listed in {numref}`quality_table`.
 ```{table} Quality flags and number of objects affected by flag.
@@ -48,9 +48,11 @@ The flags and number of objects affected by the flag are listed in {numref}`qual
 | i_gaapFlux_flag | 6 |
 | z_gaapFlux_flag | 0 |
 ```
+**Explain what this flag correspond to**
 Within 0.5 degrees of the brightest central galaxy (BCG) located at (RA, DEC) = (37.865017, 6.982205) we have 58676 objects with measurements in *griz* bands.
-The counts per bin is shown in {numref}`galaxy-dist`  with *griz* bands reaching a depth of at 24.9, 24.5, 24.3, and 23.6 mags respectively.
-Star-galaxy separation is done using the `refExtendedness` flag which will flag objects if $\frac{\textrm{flux}_\textrm{psf}}{\textrm{flux}_\textrm{cModel}} < .985$ as galaxies giving 52309 galaxies (89%) and 6367 stars (11%).
+The counts per bin is shown in {numref}`galaxy-dist`  with *griz* bands reaching a depth of at 24.9, 24.5, 24.3, and 23.6 mags respectively.**missing word**, **how do you compute those number exactly?**
+The star-galaxy separation is done using the `refExtendedness` flag, which indicate objects as galaxies if $\frac{\textrm{flux}_\textrm{psf}}{\textrm{flux}_\textrm{cModel}} < .985$. The separation leads to a sample of 52309 galaxies (89%) and 6367 stars (11%).
+**Is Fig1 only galaxy? If so, put the star/galaxy separation before. If not, change the legend.**
 
 ```{figure} _static/galaxy_dist.png
 :name: galaxy-dist

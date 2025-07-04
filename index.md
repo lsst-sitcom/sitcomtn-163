@@ -10,7 +10,7 @@ We find that both cuts are quite robust to various choices made and can produce 
 
 
 ## Introduction 
-The Rubin ComCam observing campaign undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 galaxy cluster, an intermediate mass cluster ($M_{\rm 500c} \sim 6 \times 10^{14}\ M_{\odot}$, e.g. {cite:p}``Planck) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. 
+The Rubin ComCam observing campaign undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 galaxy cluster, an intermediate mass cluster ($M_{\rm 500c} \sim 6 \times 10^{14}\ M_{\odot}$, e.g. {cite:p} `Planck15`) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. 
 In order to best measure the shear profile of the cluster, we would ideally only measure the shapes of galaxies that are lensed by the cluster, i.e. source galaxies that are behind the cluster. This can be done by identifying and removing cluster members via the red sequence, an overdensity on a color-magnitude diagram caused by the cluster members, or by removing objects near and below the redshift of the cluster. This TechNote goes over both methods to define the source selection of galaxies used to measure the shear profile. We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
 
 

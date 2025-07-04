@@ -15,7 +15,7 @@ In order to best measure the shear profile of the cluster, we would ideally only
 
 
 ## Dataset
-The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band. {cite:p}`DMTN-242`
+The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band. 
 The DP1 catalog includes various flux measurements including cModel and gaap along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
 The HSM resolution factor, defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, can be calculated from the catalog.
 Photometric redshift estimates are not included in the DP1 catalog but have been created as outlined in {cite:p}`SITCOMTN-154`.

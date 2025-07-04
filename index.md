@@ -18,21 +18,21 @@ This can be done by identifying and removing cluster members via the red sequenc
 We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
 
 This technote is one part of a series studying A360 in order to both stress test the commissioning camera and demonstrate the technical capabilities of the Vera Rubin Observatory.
-We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect{cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in _insert here_, and background subtraction in this field and Fornax in _insert here_.
+We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect{cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in {cite:p}`SITCOMTN-164`, and background subtraction in this field and Fornax in _insert here_.
  
 
 
 
 ## Dataset
 The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band.
-The Data Preview 1 (DP1){cite:p}`RTN-095good` catalog includes various flux measurements including cModel and gaap along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
-The HSM resolution factor, defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, can be calculated from the catalog.
+The Data Preview 1 (DP1){cite:p}`RTN-095good` catalog includes various flux measurements including cModel {cite:p}`SDSS2004` and GaaP {cite:p}`Kuijken_2008` along with HSM shape measurements {cite:p}`HSM1, HSM2`.
+The HSM resolution factor, {cite:p}`HSM-y1`, which compares the resolution of a galaxy to the PSF in order to remove both stars and poor quality objects, is defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$ which can be calculated from the catalog.
 Photometric redshift estimates are not included in the DP1 catalog but have been created as outlined in {cite:p}`SITCOMTN-154`.
 <!--Similarly, details on PSF and photometric calibration are located in {cite:p}`SITCOMTN-161` and photometric calibration technote . We will focus on the various cuts made to generate the cluster lensing sample for Abell 360. -->
 
 
 We apply basic quality flags to remove objects that have caused a failure in the flux measurements, namely from saturation, cosmic rays, and spurious detections.
-Each quality flag is a boolean which is set to True if the algorithm fails.
+Each quality flag is a boolean which is set to True if the algorithm fails to run on that object for whatever reason.
 The flags and number of objects affected by the flag are listed in {numref}`quality_table`.
 ```{table} Quality flags and number of objects affected by flag.
 :widths: auto
@@ -53,9 +53,14 @@ The flags and number of objects affected by the flag are listed in {numref}`qual
 | i_gaapFlux_flag | 6 |
 | z_gaapFlux_flag | 0 |
 ```
+
+
 Within 0.5 degrees of the brightest central galaxy (BCG) located at (RA, DEC) = (37.865017, 6.982205) we have 58676 objects with measurements in *griz* bands.
-The counts per bin is shown in {numref}`galaxy-dist`  with *griz* bands reaching a depth of at 24.9, 24.5, 24.3, and 23.6 mags respectively.
 Star-galaxy separation is done using the `refExtendedness` flag which will flag objects if $\frac{\textrm{flux}_\textrm{psf}}{\textrm{flux}_\textrm{cModel}} < .985$ as galaxies giving 52309 galaxies (89%) and 6367 stars (11%).
+The counts per bin of galaxies only is shown in {numref}`galaxy-dist`  with *griz* bands reaching an estimated depth of 24.9, 24.5, 24.3, and 23.6 mags respectively.
+The depths are estimated by eye using the galaxy distribution below.
+These limits are not derived from synthetic source injection and should be treated as rough guides to the true limits.
+
 
 ```{figure} _static/galaxy_dist.png
 :name: galaxy-dist
@@ -99,7 +104,7 @@ When applying the color cuts to the entire sample, we remove 873 galaxies and re
 ## Photo-Z Selection
 
 Photometric redshift (photo-*z*) selection is another option to remove any objects that would not be lensed by the cluster and thus dilute the signal.
-Photo-*z*s were estimated using FlexZBoost (FZB) {cite:p}`Flexzboost1, Flexzboost2`, TreePhotoZ (TPZ) {cite:p}`TPZ`, k-Nearest Neighbors (kNN) {cite:p}`RAIL`, and Bayesian Photo-zs (BPZ) {cite:p}`BPZ` as implemented in RAIL {cite:p}`RAIL` using the 4 available bands *griz* on cModel fluxes.
+Photo-*z*s were estimated using FlexZBoost (FZBoost) {cite:p}`Flexzboost1, Flexzboost2`, TreePhotoZ (TPZ) {cite:p}`TPZ`, k-Nearest Neighbors (kNN) {cite:p}`RAIL`, and Bayesian Photo-zs (BPZ) {cite:p}`BPZ` as implemented in RAIL {cite:p}`RAIL` using the 4 available bands *griz* on cModel fluxes.
 These estimators were chosen as kNN and BPZ will be provided by the Rubin project for future data releases while we expect FZB and TPZ to be readily available from the community.
 The estimators were trained on the same 4 bands in the ECDFS field and then applied to the cluster field.
 We apply the same cuts as in {numref}`quality_table` and also require that width of the photo-$z$ estimate, $\sigma_z$, be small ($\sigma_z < 0.25$) for each object.
@@ -145,7 +150,7 @@ For more details on the matching and performance of other photo-z estimators on 
 ### Red Sequence Redshift
 
 Checking the redshift of the red sequence members acts as a self-consitency check which for photometry and photo-z estimates.
-Applying the same red sequence cuts seen in {numref}`CMD_rs` on the DESI matched sample we can direclty read off spectroscopic redshifts which we show in {numref}`matched_rs`.
+Applying the same red sequence cuts seen in {numref}`CMD_rs` on the DESI matched sample we can directly read off spectroscopic redshifts which we show in {numref}`matched_rs`.
 We can further validate the photo-*z* estimators by comparing the DESI N(z) for the red sequence to the photometric N(z) which we display in {numref}`matched_rs_pdf`.
 
 
@@ -161,8 +166,8 @@ Histogram of spectroscopic redshifts from DESI matched red sequence galaxies in 
 Histogram of spectroscopic redshifts from DESI matched red sequence galaxies in purple along with the N(z) from the photo-*z* estimatators. The cluster location is shown as a faint dashed gray line at $z=0.22$. 
 ```
  
-
-The two match quite well giving confidence that both the galaxy photometry and photometric redshift estimates from Vera Rubin will enable high quality cluster science in the years to come.
+The peak of the DESI distribution gives us confidence that we are removing cluster members but the tail is slightly concerning. 
+The color-cuts could be optimized to reduce the size of the tail, but due to the limited coverage in the area from the DESI low-*z* catalogs and varying selection functions between the two instruments, we only use it as validation.
 
 
 ## Shear profiles and N(z)
@@ -217,7 +222,7 @@ To estimate the $N(z)$ when using color cuts, we use the ECDFS photo-*z*s and ap
 The ECDFS field was observed in 6 bands which enables higher quality photo-*z* estimates and by using the same instrument, we have a very similar selection function between the two fields.
 To offset the difference in depth between the two fields we restrict to $i < 23.5$ and SNR$_i \geq 10$.
 The increased brightness limit was chosen to keep the magnitude limit as the dominant cut in the sample (versus the SNR cut) which is not the case at $i = 24$ for the cluster field.
-The $N(z)$ with the color cut transferred is presented in {numref}`ecdfs_nz` and the $N(z)$ directly in the field in   
+The $N(z)$ with the color cut transferred is presented in {numref}`ecdfs_nz` and the $N(z)$ directly in the field in {numref}`cc_nz`.
 
 
 ```{figure} _static/ECDFS_nz.png
@@ -248,15 +253,13 @@ All 3 $N(z)$ distributions peak at $z\approx 0.6$ and approach zero by $z\approx
 Both of the 4-band distributions,  {numref}`cc_nz` and {numref}`wl_cuts_nz`, show a peak for kNN near 0.4 which is concerning. 
 The photo-z $N(z)$ is very good at removing low redshift objects as seen by the flat distribution between the red and gray lines in {numref}`cc_nz`. 
 
-```{note}
-
-Add shear ratio plots for pz cuts using 2 bins if any of them are good.
-```
-
 
 ## Conclusion
 
-
+In this technote we have outlined the source selection for studying A360 in order to enable cluster weak lensing and verify the science pipelines.
+We find that the high quality photometry makes the red sequence easily identifiable and the source selection foairly consistent between the multiple colors.
+When using photometric redshifts, we are able to recreate a similar signal and validate against the DESI spectroscopic redshifts which acts as a completely external test suite for photometric redshifts which were not trained on DESI spec-*z*s.
+In total, the two methods give confidence that the combination of object detection and deblending, galaxy photometry, and photometric redshift estimates from the Vera Rubin observatory will enable high quality cluster science in the years to come.
 
 ## References 
 

@@ -21,3 +21,12 @@ orcid = "https://orcid.org/0000-0001-9431-3806"
 name = "Department of Physics and Astronomy"
 internal_id = "StonyBrookU"
 address = "Stony Brook University, Stony Brook, NY 11794, USA"
+
+
+# https://github.com/lsst/lsst-texmf/blob/main/etc/authordb.yaml
+[[technote.authors]]
+name.given = "Anja"
+name.family = "von der Linden"
+internal_id = "lindena"
+
+

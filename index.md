@@ -1,8 +1,8 @@
 # Source Selection for Abell 360 in LSSTComCam Data Preview 1
 
 ```{abstract}
-We cover the source selection done for the Abell 360 ComCam cluster study focusing on color and photo-z cuts.
-Identification of cluster members via the red sequence and photo-z offers a science focused validation of photometry with ComCam.
+We cover the source selection done for the Abell 360 LSSTComCam cluster study focusing on color and photo-z cuts.
+Identification of cluster members via the red sequence and photo-z offers a science focused validation of photometry with LSSTComCam.
 We are able to cross-match with DESI spectroscopic redshifts to offer an independent validation suite on photo-z estimates.
 We make various color and photo-z cuts to generate N(z)s and shear profiles.
 We find that both cuts are quite robust to various choices made and can produce a shear profile for Abell 360. Both methods should be applicable to generating a consistent mass estimate for the cluster.

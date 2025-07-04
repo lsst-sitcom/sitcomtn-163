@@ -1,4 +1,4 @@
-# Source Selection for Abell 360 in ComCam Data
+# Source Selection for Abell 360 in LSSTComCam Data Preview 1
 
 ```{abstract}
 We cover the source selection done for the Abell 360 ComCam cluster study focusing on color and photo-z cuts.
@@ -10,20 +10,25 @@ We find that both cuts are quite robust to various choices made and can produce 
 
 
 ## Introduction 
-The Rubin ComCam observing campaign undertaken at the end-of-year 2024 covered seven fields, among which the low ecliptic latitude Rubin SV 38 7 field. This field contains the Abell 360 galaxy cluster, an intermediate mass cluster (quote mass + ref) at z=0.22, that we use as a commissioning demonstrator of Rubin capabilities for cluster WL studies. 
-In order to best measure the shear profile of the cluster, we would ideally only measure the shapes of galaxies that are lensed by the cluster, i.e. source galaxies that are behind the cluster. This can be done by identifying and removing cluster members via the red sequence, an overdensity on a color-magnitude diagram caused by the cluster members, or by removing objects near and below the redshift of the cluster. This TechNote goes over both methods to define the source selection of galaxies used to measure the shear profile. We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
+The Rubin LSSTComCam {cite:p}`ComCam` observing campaign undertaken at the end-of-year 2024 covered seven fields, among which include the low ecliptic latitude Rubin SV 38 7 field containing the Abell 360 (A360) galaxy cluster.
+A360 is an intermediate mass cluster ({math}`M_{500,c} = 4.3\times 10^14 M_\odot`{cite:p}`A360m` at z=0.22 {cite:p}`A360z` that we use as a commissioning demonstrator of Rubin capabilities for cluster weak lensing (WL) studies. 
+In order to best measure the shear profile of the cluster, we would ideally only measure the shapes of galaxies that are lensed by the cluster, i.e. source galaxies that are behind the cluster.
+This can be done by identifying and removing cluster members via the red sequence, an overdensity on a color-magnitude diagram caused by the cluster members, or by removing objects near and below the redshift of the cluster.
+<!--This TechNote goes over both methods to define the source selection of galaxies used to measure the shear profile.-->
+We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
+
+This technote is one part of a series studying A360 in order to both stress test the commissioning camera and demonstrate the technical capabilities of the Vera Rubin Observatory.
+We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect{cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in _insert here_, and background subtraction in this field and Fornax in _insert here_.
+ 
+
 
 
 ## Dataset
-The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band. {cite:p}`DMTN-242`
-The DP1 catalog includes various flux measurements including cModel and gaap along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
+The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band.
+The Data Preview 1 (DP1){cite:p}`RTN-095good` catalog includes various flux measurements including cModel and gaap along with HSM shape measurements {cite:p}`HSM1, HSM2`. 
 The HSM resolution factor, defined as $R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, can be calculated from the catalog.
 Photometric redshift estimates are not included in the DP1 catalog but have been created as outlined in {cite:p}`SITCOMTN-154`.
-Similarly, details on PSF and photometric calibration are located in {cite:p}`SITCOMTN-161` and photometric calibration technote . We will focus on the various cuts made to generate the cluster lensing sample for Abell 360. 
-
-```{note}
-Photometric calibration technote is still in draft and has not been made on SITCOM yet
-```
+<!--Similarly, details on PSF and photometric calibration are located in {cite:p}`SITCOMTN-161` and photometric calibration technote . We will focus on the various cuts made to generate the cluster lensing sample for Abell 360. -->
 
 
 We apply basic quality flags to remove objects that have caused a failure in the flux measurements, namely from saturation, cosmic rays, and spurious detections.
@@ -38,7 +43,7 @@ The flags and number of objects affected by the flag are listed in {numref}`qual
 | --------- | ---------------- |
 | refExtendedness | 24892 |
 | i_iPSF_flag | 62462 |
-| i_hsmSHapeRegauss_flag | 91836 |
+| i_hsmShapeRegauss_flag | 91836 |
 | g_cModel_flag | 4016 |
 | r_cModel_flag | 4228 |
 | i_cModel_flag | 4137 |
@@ -61,8 +66,8 @@ Distribution of galaxy magnitudes with (approximate) limiting magnitude shown as
 
 ## Color-cuts
 
-We can select cluster members by identifying the red sequence [citation?] in a color-magnitude diagram.
-Due to the lack of observations in *z* we focus on the gri bands and the colors (*g-r*, *r-i*, *g-i*) from this set.
+We can select cluster members by identifying the red sequence galaxies in a color-magnitude diagram.
+Due to the lack of observations in *z* we focus on the _gri_ bands and the colors (*g-r*, *r-i*, *g-i*) from this set.
 To correct for varying aperture sizes, we use gaap fluxes when combining bands for colors and use the cModel flux when calculating magnitudes.
 To identify the red sequence we first restrict to detections within 0.1 degrees (1.3 Mpc) of the BCG which leaves 2194 galaxies. 
 The color-magnitude diagram is shown below in {numref}`CMD_nors`
@@ -94,68 +99,71 @@ When applying the color cuts to the entire sample, we remove 873 galaxies and re
 ## Photo-Z Selection
 
 Photometric redshift (photo-*z*) selection is another option to remove any objects that would not be lensed by the cluster and thus dilute the signal.
-The photo-*z*s were estimated using FlexZBoost (FZB) {cite:p}`Flexzboost1, Flexzboost2`, TreePhotoZ (TPZ) {cite:p}`TPZ`, k-Nearest Neighbors (kNN) {cite:p}`RAIL`, and Bayesian Photo-zs (BPZ) {cite:p}`BPZ` as implemented in RAIL {cite:p}`RAIL` using the 4 available bands *griz* on cModel fluxes.
+Photo-*z*s were estimated using FlexZBoost (FZB) {cite:p}`Flexzboost1, Flexzboost2`, TreePhotoZ (TPZ) {cite:p}`TPZ`, k-Nearest Neighbors (kNN) {cite:p}`RAIL`, and Bayesian Photo-zs (BPZ) {cite:p}`BPZ` as implemented in RAIL {cite:p}`RAIL` using the 4 available bands *griz* on cModel fluxes.
 These estimators were chosen as kNN and BPZ will be provided by the Rubin project for future data releases while we expect FZB and TPZ to be readily available from the community.
-The estimators were trained on the same 4 bands in the ECDFS field and then applied to the cluster field. Since the cluster redshift is 0.22 {cite:p}`A360z`, we can place a simple cut on the photo-*z* point estimates to remove any galaxies that would be unlensed by the cluster.
+The estimators were trained on the same 4 bands in the ECDFS field and then applied to the cluster field.
+We apply the same cuts as in {numref}`quality_table` and also require that width of the photo-$z$ estimate, $\sigma_z$, be small ($\sigma_z < 0.25$) for each object.
+Along with removing spurious and extremely faint objects, we remove objects that are likely causing large issues for photo-z estimators due to the missing *u* and *y* band.
+The redshift distribution, {math}`N(z)`, after applying these quality cuts is shown in {numref}`quality_cuts_nz` along with the location of our subsequent photo-*z* cut to remove cluster members which we place at $z = 0.37 = 0.22 + .15$ to account for wide error bars in photo-*z* estimates.
+This cut is placed on the central statistic of the technique which is mean for all techniques except kNN for which we use median due to implementation issues.
 
-We plot the redshift distribution for kNN and BPZ in {numref}`knn_bpz` and for FZB and TPZ in {numref}`fzb_tpz`.
+```{figure} _static/quality_cuts_nz.png
+:name: quality_cuts_nz
 
-```{note}
-
-Add Eric's $\sigma_z < 0.15$ quality cut
+Photometric redshift distribution for the galaxy sample (within 0.5 deg, or 6.4 Mpc, of the central BCG and with 20 < _i_ < 24) for 4 photometric redshift estimators. BPZ is shown in blue, TPZ in orange, FZBoost in green, and kNN in red. A faint dashed line is included where the cluster cut will be placed ($z = 0.37$).
 ```
 
-```{figure} _static/bpz_knn.png
-:name: knn_bpz
-
-Photometric redshift distribution for the galaxy sample (within 0.5 deg, or 6.4 Mpc, of the central BCG) and with i < 24. Blue histogram is using the kNN median estimate, orange histogram for BPZ median, and the black line represents the cluster location. A faint red line is added to display the location of an additional photo-*z* cut used, see text for motivation in choosing these additional cuts.
-```
-
-```{figure} _static/fzb_tpz.png
-:name: fzb_tpz
-
-Photometric redshift distribution for the galaxy sample (within 0.5 deg, or 6.4 Mpc, of the central BCG) and with i < 24. Purple  histogram is using the FlexZBoost median estimate, blue histogram for TreePZ median, and the black line represents the cluster location. A faint red line is added to display the location of an additional photo-*z* cut used, see text for motivation in choosing these additional cuts.
-```
-
-```{note}
-
-Update the photo-z cuts to only have $z_{cl} = 0.22 + 0.15$
-```
 In this field, we have overlap with the DESI {cite:p}`DESI-dr1` BGS {cite:p}`BGS`, ELG {cite:p}`ELG`, and LRG {cite:p}`LRG` catalogs, shown in {numref}`desi_location`, which allows us to perform simple external validation on the four redshift techniques.
-To validate the techniques, we compare the photo-z for objects with matches to the DESI sample which we show in {numref}`desi_validation_knnbpz` for kNN and BPZ and in {numref}`desi_validation_fzbtpz` for FZB and TPZ.
-Both techniques suffer at the low and high $z$ range which can be attributed to the missing *u* and *y* bands but are overall acceptable.
-For objects with spec-$z > 0.8$, it is possible that there is a mismatch between the training sample, observed sample, and validation sample which could cause systematic issues for the predictors.
-
 
 ```{figure} _static/desi_location.png
 :name: desi_location
 
 Overlap between SV 38-7 field and various DESI subsamples. Note that the BGS sample that covers the low-z regime does not uniformly cover the region and thus we are incomplete in this space. From {cite}`SITCOMTN-154`.
 ```
+To validate the techniques, we compare the photo-*z* for objects with matches to the DESI sample which we show in {numref}`desi_validation`  without placing a cut on $\sigma_z$ and in {numref}`cut_desi_validation` to highlight the improvement in photo-*z* estimate when using this cut. 
+Even without placing the cut, most techniques perform quite well up to $z < 0.8$ but then suffer onwards.
+It is likely that this is caused by a mismatch between the training sample and validation sample (ELGs) which can cause systematic issues.
+Once a cut on $\sigma_z$ is placed, we have much higher quality photo-*z* estimates at the cost of roughly half the remaining sample.
 
-```{figure} _static/desi_validation_fzbtpz.png
-:name: desi_validation_fzbtpz
 
-Validation for FZB and TPZ with spectroscopic redshift on x-axis and estimated photometric redshift on y-axis. 
+```{figure} _static/scatter_compare_nocut.png
+:name: desi_validation 
+
+Photometric redshift estimates versus matched spectroscopic redshifts from DESI for the four methods studied in this technote with minimal quality cuts applied ({numref}`quality_table` only), namely no $\sigma_z$ cut applied on the photometric redshift estimates. In the upper left in blue we display BPZ, upper right in orange TPZ, lower left in green FZBoost, and lower right in red kNN. The issues at high redshift ($z >0.8$) may be caused by mismatch between the training and validation sets. 
 ```
 
-```{figure} _static/desi_validation_knnbpz.png
-:name: desi_validation_knnbpz
 
-Validation for kNN and BPZ with spectroscopic redshift on x-axis and estimated photometric redshift on y-axis. 
+```{figure} _static/scatter_compare_cut.png
+:name: cut_desi_validation 
+
+Photometric redshift estimates versus matched spectroscopic redshifts from DESI for the four methods studied in this technote with quality cuts applied ({numref}`quality_table`) along with requiring  $\sigma_z < 0.25$. In the upper left in blue we display BPZ, upper right in orange TPZ, lower left in green FZBoost, and lower right in red kNN. Note the improvement from {numref}`desi_validation`.
 ```
 
-For kNN and BPZ, we make cuts at photo-$z = 0.22$ and $0.45$.
-The first cut is directly at the cluster redshift and would remove most cluster members if we had perfect photo-*z*s and the second to remove the spike in the distribution from {numref}`knn_bpz`.
-For FZB and TPZ, we make cuts at photo-$z = 0.22$ and $0.6$. The second cut from TPZ overestimating redshift of objects up until $z\approx 0.6$ as shown in {numref}`desi_validation_fzbtpz`.
 
 For more details on the matching and performance of other photo-z estimators on this field, and DP1 in general, please refer to {cite}`SITCOMTN-154`.
 
+### Red Sequence Redshift
 
-```{note}
+Checking the redshift of the red sequence members acts as a self-consitency check which for photometry and photo-z estimates.
+Applying the same red sequence cuts seen in {numref}`CMD_rs` on the DESI matched sample we can direclty read off spectroscopic redshifts which we show in {numref}`matched_rs`.
+We can further validate the photo-*z* estimators by comparing the DESI N(z) for the red sequence to the photometric N(z) which we display in {numref}`matched_rs_pdf`.
 
-Add sub-section on red sequence + DESI plot. Text about validation with photometry and photo-z
+
+```{figure} _static/matched_redseq_z.png
+:name: matched_rs
+
+Histogram of spectroscopic redshifts from DESI matched red sequence galaxies in blue. The cluster location is shown as a faint dashed gray line at $z=0.22$.
 ```
+
+```{figure} _static/matched_redseq_z-pzpdf.png
+:name: matched_rs_pdf
+
+Histogram of spectroscopic redshifts from DESI matched red sequence galaxies in purple along with the N(z) from the photo-*z* estimatators. The cluster location is shown as a faint dashed gray line at $z=0.22$. 
+```
+ 
+
+The two match quite well giving confidence that both the galaxy photometry and photometric redshift estimates from Vera Rubin will enable high quality cluster science in the years to come.
+
 
 ## Shear profiles and N(z)
 With a variety of source selection methods available, we can compare the $N(z)$ and final HSM shear profile from each source to see if the subsamples are relatively stable.
@@ -168,7 +176,7 @@ The cuts and values used are listed below in {numref}`weaklen_table`
 | Column |
 | ------ |
 | refExtendedness > 0.5 | 
-| i_cModel_mag $\leq$ 24 |
+| 20 $\leq$ i_cModel_mag $\leq$ 24 |
 | $\frac{\textrm{i_cModelFlux}}{\textrm{i_cModelFluxErr}} \geq 10$ |
 | i_hsmShapeRegauss_e1$^2$ + i_hsmShapeRegauss_e2$^2 \leq 4$ |
 | $1-\frac{T_\textrm{PSF}}{T_\textrm{I}} \geq 0.3$ |
@@ -187,8 +195,8 @@ Once calibrated, we can convert the shears to tangential and cross copmonents us
 
 Once calibrated and converted, we can extract a shear profile centered on the BCG and vary the color cuts applied which we present in {numref}`shear_profile_cc`.
 Notably, the profile is quite insensitive to the specific color cut chosen with the tangential components located at similar values and the cross component mostly consistent with 0. 
-Similarly, we can apply varied photo-*z* cuts which we show in {numref}`shear_profile_fzb` for FZB and TPZ, and in {numref}`shear_profile_knn` for kNN and BPZ.
-While there is a larger spread on the value of the $\gamma_+$ between the cuts, the signal is quite similar to the color-cut profile and similarly passes the null test of $\gamma_\times = 0$ aside from the innermost bin which only has $\sim 30$ galaxies.
+Similarly, we can apply our photo-$z > 0.37$ cut on BPZ, TPZ, FZBoost, and kNN to produce a source sample that we calculate the shear profile of in {numref}`shear_profile_pz`. 
+While there is a larger spread on the value of the $\gamma_+$ between the cuts, the signal is quite similar to the color-cut profile and similarly passes the null test of $\gamma_\times = 0$ aside from the fourth bin which is high in the color-cut profile as well.
 
 
 ```{figure} _static/shear_profile_cc.png
@@ -197,54 +205,56 @@ While there is a larger spread on the value of the $\gamma_+$ between the cuts, 
 The shear profile with varying color cuts. The tangential shear component is shown with circular points and cross shear component with x points. The error bar represents a 95% confidence interval from bootstrapped samples. “All colors” refers to using all three red sequences and is shown in dark blue, "g-i" uses points found only on the $g-i$ red sequence and is shown in light blue, "r-i" for the $r-i$ redsequence and shown in light red, and "g-r" for the $g-r$ redsequence and shown in dark red. The points are staggered on the x-axis for clarity. 
 ```
 
-```{figure} _static/shear_profile_pz_fzbtpz.png
-:name: shear_profile_fzb
+```{figure} _static/shear_profile_pz.png
+:name: shear_profile_pz
 
-The shear profile with varying FZB photo-z cuts.  Same formatting as above figure. The cut with photo-*z* > 0.22 is shown in dark blue, photo-*z* > 0.4 is shown in light blue, photo-*z* > 0.6 in light red, and photo-z > 0.5 in dark red. 
+The shear profile with varying photo-*z* estimators all cut at $z=0.37$. BPZ is shown in blue, TPZ in orange, FZBoost in green, and kNN in red. The cross shear term is shown in the same colors but much fainter and with a "x" at the point instaed of a dot. The data is staggered on the x-axis for clarity. 
 ```
 
-```{figure} _static/shear_profile_pz_knnbpz.png
-:name: shear_profile_knn
-
-The shear profile with varying FZB photo-z cuts.  Same formatting as above figure. The cut with photo-*z* > 0.22 is shown in dark blue, photo-*z* > 0.4 is shown in light blue, photo-*z* > 0.6 in light red, and photo-z > 0.5 in dark red. 
-```
 
 ### N(z)
 To estimate the $N(z)$ when using color cuts, we use the ECDFS photo-*z*s and apply the same red sequence and weak lensing cuts.
 The ECDFS field was observed in 6 bands which enables higher quality photo-*z* estimates and by using the same instrument, we have a very similar selection function between the two fields.
-The weak lensing cut requiring $i < 24$ helps mitigate any difference in depth between the two samples. 
-The $N(z)$ from color cuts is presented in {numref}`nz_knnbpz` for kNN and BPZ and in {numref}`nz_fzbtpz` for FZB and TPZ.
+To offset the difference in depth between the two fields we restrict to $i < 23.5$ and SNR$_i \geq 10$.
+The increased brightness limit was chosen to keep the magnitude limit as the dominant cut in the sample (versus the SNR cut) which is not the case at $i = 24$ for the cluster field.
+The $N(z)$ with the color cut transferred is presented in {numref}`ecdfs_nz` and the $N(z)$ directly in the field in   
 
-```{note}
 
-Need to add $i_{SNR} \geq 10$ cut as well and update these N(z) to actually use the stacked PDFs
-```
+```{figure} _static/ECDFS_nz.png
+:name: ecdfs_nz
 
-<!--```{figure} _static/fzb_nz.png
-:name: fzb_nz
-
-The estimated n(z) using the FZB with the various photo-z cuts imposed as dashed lines. 
-```-->
-
-```{figure} _static/ECDFS_nz_knnbpz.png
-:name: nz_knnbpz
-
-The estimated n(z) using ECDFS kNN (top panel) and BPZ (bottom panel) photo-$z$ estimates and applying the "all colors" red sequence cut. In both panels, the lighter color is used to display the distribution before applying the color cut, and darker after. Note that we have applied several additional weak lensing cuts as apposed to the simple photometry quality flags in {numref}`knn_bpz`.
-```
-
-```{figure} _static/ECDFS_nz_fzbtpz.png
-:name: nz_fzbtpz
-
-The estimated n(z) using ECDFS FZB (top panel) and TPZ (bottom panel) photo-$z$ estimates and applying the "all colors" color cut. In both panels, the lighter color is used to display the distribution before applying the color cut, and darker after. Note that we have applied several additional weak lensing cuts as apposed to the simple photometry quality flags in {numref}`fzb_tpz`.
+$N(z)$ from 6 band photo-*z* estimates when applying quality cuts, weak lensing cuts, and color cuts all transferred to the ECDFS sample. BPZ is shown in blue, TPZ in orange, FZboost in green, and kNN in red. A dashed red line is added to show the location of the cluster.
 ```
 
 
+```{figure} _static/cc_cuts_4bandsnz.png
+:name: cc_nz
+
+$N(z)$ from 4 band photo-*z* estimates when applying quality cuts, weak lensing cuts, and color cuts. BPZ is shown in blue, TPZ in orange, FZboost in green, and kNN in red. A dashed red line is added to show the location of the cluster.
+```
+
+On the photo-*z* cut, we remove objects that have their central statistic (mean) below $z=0.37$ but the $N(z)$ will still have support in that range from objects near the cut with wide distributions.
+The distribution is plotted in {numref}`wl_cuts_nz`.
+
+
+```{figure} _static/wl_cuts_nz.png
+:name: wl_cuts_nz
+
+$N(z)$ from the 4 photo-*z* techniques after applying quality cuts, a $\sigma_z$ cut, weak lensing cuts, and $z \leq 0.37$ cut. BPZ is shown in blue, TPZ in orange, FZBoost in green, and kNN in red. A dashed red line is added to show the location of the cluster and a dashed gray line is added to show the location of the photo-*z* cut.
+```
+
+
+All 3 $N(z)$ distributions peak at $z\approx 0.6$ and approach zero by $z\approx 1.3$.
+Both of the 4-band distributions,  {numref}`cc_nz` and {numref}`wl_cuts_nz`, show a peak for kNN near 0.4 which is concerning. 
+The photo-z $N(z)$ is very good at removing low redshift objects as seen by the flat distribution between the red and gray lines in {numref}`cc_nz`. 
 
 ```{note}
 
 Add shear ratio plots for pz cuts using 2 bins if any of them are good.
 ```
 
+
+## Conclusion
 
 
 

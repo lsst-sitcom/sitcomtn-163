@@ -17,7 +17,7 @@ A360 is an intermediate mass cluster ({math}`M_{500,c} = 4.3\times 10^14 M_\odot
 In order to best measure the shear profile of the cluster, we would ideally only measure the shapes of galaxies that are lensed by the cluster, i.e. source galaxies that are behind the cluster.
 This can be done by identifying and removing cluster members via the red sequence, an overdensity on a color-magnitude diagram caused by the cluster members, or by removing objects near and below the redshift of the cluster.
 <!--This TechNote goes over both methods to define the source selection of galaxies used to measure the shear profile.-->
-We will discuss both methods, associated verification, the estimated n(z) from each method, and the shear profile from the various sources.
+We will discuss both methods, associated verification, the estimated redshift distribution, $N(z)$, from each method, and the shear profile from the various sources.
 
 This technote is one part of a series studying A360 in order to both stress test the commissioning camera and demonstrate the technical capabilities of the Vera Rubin Observatory.
 We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect {cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in {cite:p}`SITCOMTN-164`, and background subtraction in this field and Fornax in _insert here_.

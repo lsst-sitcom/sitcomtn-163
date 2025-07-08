@@ -20,7 +20,7 @@ This can be done by identifying and removing cluster members via the red sequenc
 We will discuss both methods, associated verification, the estimated redshift distribution, $N(z)$, from each method, and the shear profile from the various sources.
 
 This technote is one part of a series studying A360 in order to both stress test the commissioning camera and demonstrate the technical capabilities of the Vera Rubin Observatory.
-We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect {cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in {cite:p}`SITCOMTN-164`, and background subtraction in this field and Fornax in _insert here_.
+We study the quality of the PSF modeling and impact it can have on cluster WL in {cite}`SITCOMTN-161`, implementation of cell-based coadds and subsequent use for Metadetect {cite:p}`Sheldon_2023` in {cite}`SITCOMTN-162`, photometric calibration in _insert here_, use of Anacal {cite:p}`Li_2023` to produce a shear profile in {cite}`SITCOMTN-164`, and background subtraction in this field and Fornax in _insert here_.
  
 
 

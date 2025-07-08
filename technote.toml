@@ -22,11 +22,72 @@ name = "Department of Physics and Astronomy"
 internal_id = "StonyBrookU"
 address = "Stony Brook University, Stony Brook, NY 11794, USA"
 
-
-# https://github.com/lsst/lsst-texmf/blob/main/etc/authordb.yaml
 [[technote.authors]]
 name.given = "Anja"
 name.family = "von der Linden"
 internal_id = "lindena"
+orcid = "https://orcid.org/0000-0002-3881-7724"
+[[technote.authors.affiliations]]
+name = "Department of Physics and Astronomy"
+internal_id = "StonyBrookU"
+address = "Stony Brook University, Stony Brook, NY 11794, USA"
+
+[[technote.authors]]
+name.given = "Tianqing"
+name.family = "Zhang"
+internal_id = "zhangt"
+orcid = "https://orcid.org/0000-0002-5596-198X"
+[[technote.authors.affiliations]]
+name = "University of Pittsburgh"
+internal_id = "Pitts"
+address = "3941 O'Hara Street, Pittsburgh, PA 15260, USA"
 
 
+[[technote.authors]]
+name.given = "Céline"
+name.family = "Combet"
+orcid = "https://orcid.org/0000-0002-5596-198X"
+
+[[technote.authors]]
+name.given = "Anthony"
+name.family = "Englert"
+internal_id = "englerta"
+orcid = "https://orcid.org/0000-0003-2314-5336"
+[[technote.authors.affiliations]]
+name = "Brown University"
+internal_id = "Brown"
+address = "Brown University, Providence, RI 02909, USA"
+
+[[technote.authors]]
+name.given = "Shenming"
+name.family = "Fu"
+internal_id = "fus"
+orcid = "https://orcid.org/0000-0001-5422-1958"
+[[technote.authors.affiliations]]
+name = "Kavli Institute for Particle Astrophysics and Cosmology"
+internal_id = "SLAC-Kavli"
+address = "SLAC National Accelerator Laboratory, 2575 Sand Hill Rd., Menlo Park, CA 94025, USA"
+
+[[technote.authors]]
+name.given = "Narei"
+name.family = "Lorenzo Martinez"
+internal_id = "nlorenzo"
+orcid = "https://orcid.org/0000-0002-7857-7606"
+[[technote.authors.affiliations]]
+name = "Laboratoire d’Annecy de Physique des Particules"
+internal_id = "LAPP"
+address = "9 chemin de Bellevue, Annecy, France"
+
+[[technote.authors]]
+name.given = "Andrés A."
+name.family = "Plazas Malagón"
+internal_id = "plazasa"
+orcid = "https://orcid.org/0000-0002-2598-0514"
+[[technote.authors.affiliations]]
+name = "SLAC National Accelerator Laboratory"
+internal_id = "SLAC"
+address = "2575 Sand Hill Rd, Menlo Park, CA 94025, United States"
+[[technote.authors.affiliations]]
+name = "Kavli Institute For Particle Astrophysics and Cosmology"
+internal_id = "SLAC-Kavli"
+address = "2575 Sand Hill Rd, Menlo Park, CA 94025, United States"

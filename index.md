@@ -28,6 +28,8 @@ We study the quality of the PSF modeling and impact it can have on cluster WL in
 ## Dataset
 The Rubin SV 38 7 field has been observed in *g* (44 visits), *r* (55 visits), *i* (57 visits) and *z* (27 visits) {cite:p}`RTN-011` with no visits in u and y-band.
 The Data Preview 1 (DP1) Object catalog {cite:p}`RTN-095good, ObjectTable`includes various flux measurements including cModel {cite:p}`SDSS2004` and GaaP {cite:p}`Kuijken_2008` along with HSM shape measurements {cite:p}`HSM1, HSM2`.
+This was accessed using the Butler {cite:p}`Butler` with {code}`repo="dp1"` and {code}`collection="LSSTComCam/DP1"`.
+
 The second moments of the light profile of objects, $Q_{ij}$, and of the PSF at each object, $Q^{\textrm{PSF}}_{ij}$, are included which can be combined to create size estimate $T = Q_{xx} + Q_{yy}$ of the object and PSF at that point. 
 These are in turn used to calculate the HSM resolution factor {cite:p}`HSM-y1`,$R = 1-\frac{T_\textrm{PSF}}{T_\textrm{I}}$, which compares the resolution of a galaxy to the PSF in order to remove stars and poor quality objects
 Photometric redshift estimates are not included in the DP1 catalog but have been created as outlined in {cite:p}`SITCOMTN-154`.
@@ -59,7 +61,7 @@ The flags and number of objects affected by the flag are listed in {numref}`qual
 
 Within 0.5 degrees of the brightest central galaxy (BCG) located at (RA, DEC) = $(37.865017^{\circ}, 6.982205^{\circ})$ we have 58676 objects with measurements in *griz* bands.
 Star-galaxy separation is done using the `refExtendedness` flag which will flag objects if $\frac{\textrm{flux}_\textrm{psf}}{\textrm{flux}_\textrm{cModel}} < .985$ {cite:p}`2018HSC`  as galaxies giving 52309 galaxies (89%) and 6367 stars (11%).
-The counts per bin of galaxies only is shown in {numref}`galaxy-dist`  with *griz* bands reaching an estimated depth of 24.9, 24.5, 24.3, and 23.6 mags respectively.
+The counts per bin of galaxies only is shown in {numref}`galaxy-dist`  with *griz* bands reaching an estimated depth of 24.9, 24.4, 24.2, and 23.5 mags respectively.
 The depths are estimated by using the peak of the galaxy magnitude distribution below.
 These limits are not derived from synthetic source injection and should be treated as rough guides to the true limits.
 
@@ -77,7 +79,7 @@ We can select cluster members by identifying the red sequence galaxies in a colo
 Due to fewer observations in *z* we focus on the _gri_ bands and the colors (*g-r*, *r-i*, *g-i*) from this set.
 We use cModel fluxes for magnitudes and GaaP1p0 fluxes for colors.
 <!--To correct for varying aperture sizes, we use GaaP fluxes when combining bands for colors and use the cModel flux when calculating magnitudes.-->
-To identify the red sequence we first restrict to detections within 0.1 degrees (1.3 Mpc) of the BCG which leaves 2194 galaxies. 
+To identify the red sequence we first restrict to detections within 0.1 degrees (1.3 Mpc) of the BCG which leaves 2194 galaxies (as identified by `refExtendedness==1`). 
 The color-magnitude diagram is shown below in {numref}`CMD_nors`
 
 
@@ -87,12 +89,12 @@ The color-magnitude diagram is shown below in {numref}`CMD_nors`
 Color-magnitude diagrams for galaxies near the BCG using cModel r magnitude on x-axis and GaaP calculated colors on the y-axis. From left to right we show the *g-i*, *r-i*, and *g-r* colors with the red sequence overdensity clearly visible. 
 ```
 
-The red sequence is identified per color by eye with a limiting magnitude of $r < 24$ applied and shown in {numref}`CMD_rs` giving 286, 316, 286 objects in the *g-i*, *r-i*, and *g-r* CMDs respectively. Requiring that an object be in all three red sequences restricts us to 216 objects and is shown in {numref}`CMD_all_rs`.
+The red sequence is identified per color by eye along with magnitude cuts $18 < r < 24$ applied and shown in {numref}`CMD_rs` giving 340, 428, 348 objects in the *g-i*, *r-i*, and *g-r* CMDs respectively. Requiring that an object be in all three red sequences restricts us to 218 objects and is shown in {numref}`CMD_all_rs`.
 
 ```{figure} _static/CMD_rs.png
 :name: CMD_rs
 
-Red sequence members identified by eye and adding a magnitude limit of $r < 24$. From left to right we show the *g-i*, *r-i*, and *g-r* colors.
+Red sequence members identified by eye and adding magnitude cuts of $18 < r < 24$. From left to right we show the *g-i*, *r-i*, and *g-r* colors.
  
 ```
 
@@ -102,7 +104,7 @@ Red sequence members identified by eye and adding a magnitude limit of $r < 24$.
 Multi-color red sequence members. From left to right we show the *g-i*, *r-i*, and *g-r* colors. 
 ```
 
-When applying the color cuts to the  sample (within 0.5$^\circ$ of the BCG), we remove 873 galaxies and remain with 57803 galaxies. 
+When applying all three color cuts to the sample (within 0.5$^\circ$ of the BCG), we remove 997 entries and remain with 57679 objects.
 
 ## Photo-Z Selection
 
@@ -194,7 +196,8 @@ The cuts and values used are listed below in {numref}`weaklen_table`
 
 
 ### Shear Profile
-To calculate the shear profile for each subsample when applying color cuts or photo-z cuts, we first convert from $e_1$ and $e_2$ to $\gamma_1$ and $\gamma_2$ by applying HSC Y1 shear calibration {cite:p}`HSCCalib1, HSCCalib2`.
+To calculate the shear profile for each subsample when applying color cuts or photo-z cuts, we first convert from $e_1$ and $e_2$ to $\gamma_1$ and $\gamma_2$ by applying HSC Y3 shear calibration {cite:p}`HSC-y3`. 
+<!--{cite:p}`HSCCalib1, HSCCalib2`.-->
 <!--For other shear calibration techniques please see [Anacal technote] for results when applying Anacal, and {cite}`SITCOMTN-162` for Metadetect.-->
 Once calibrated, we can convert the shears to tangential and cross components using the cluster BCG, located at (RA, DEC) = (37.865017, 6.982205), using 
 ```{math}
@@ -211,7 +214,7 @@ While there is a larger spread on the value of the $\gamma_+$ between the cuts, 
 ```{figure} _static/shear_profile_cc.png
 :name: shear_profile_cc
 
-The shear profile with varying color cuts. The tangential shear component is shown with circular points and cross shear component with x points. The error bar represents a 95% confidence interval from bootstrapped samples. “All colors” refers to using all three red sequences and is shown in dark blue, "g-i" uses points found only on the $g-i$ red sequence and is shown in light blue, "r-i" for the $r-i$ redsequence and shown in light red, and "g-r" for the $g-r$ redsequence and shown in dark red. The points are staggered on the x-axis for clarity. 
+The shear profile with varying color cuts. The tangential shear component is shown with circular points and cross shear component with x points with fainter colors. The error bar represents a 95% confidence interval from bootstrapped samples. “All colors” refers to using all three red sequences and is shown in black, "g-i" uses points found only on the $g-i$ red sequence and is shown in green, "r-i" for the $r-i$ red sequence and shown in orange, and "g-r" for the $g-r$ red sequence and shown in purple. The points are staggered on the x-axis for clarity. 
 ```
 
 ```{figure} _static/shear_profile_pz.png

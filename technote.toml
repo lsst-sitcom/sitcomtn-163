@@ -13,83 +13,91 @@ license.id = "CC-BY-4.0"
 state = "stable"
 
 [[technote.authors]]
-name.given = "Prakruth"
-name.family = "Adari"
 internal_id = "adarip"
 orcid = "https://orcid.org/0000-0001-9431-3806"
+name = {given = "Prakruth", family = "Adari"}
 [[technote.authors.affiliations]]
-name = "Department of Physics and Astronomy"
+name = "Stony Brook University"
 internal_id = "StonyBrookU"
 address = "Stony Brook University, Stony Brook, NY 11794, USA"
+ror = "https://ror.org/05qghxh33"
 
 
 
 [[technote.authors]]
-name.given = "Anja"
-name.family = "von der Linden"
 internal_id = "lindena"
 orcid = "https://orcid.org/0000-0002-3881-7724"
+name = {given = "Anja", family = "von der Linden"}
 [[technote.authors.affiliations]]
-name = "Department of Physics and Astronomy"
+name = "Stony Brook University"
 internal_id = "StonyBrookU"
 address = "Stony Brook University, Stony Brook, NY 11794, USA"
+ror = "https://ror.org/05qghxh33"
 
 [[technote.authors]]
-name.given = "Tianqing"
-name.family = "Zhang"
 internal_id = "zhangt"
 orcid = "https://orcid.org/0000-0002-5596-198X"
+name = {given = "Tianqing", family = "Zhang"}
 [[technote.authors.affiliations]]
 name = "University of Pittsburgh"
 internal_id = "Pitts"
 address = "3941 O'Hara Street, Pittsburgh, PA 15260, USA"
+ror = "https://ror.org/01an3r305"
 
 
 [[technote.authors]]
-name.given = "Céline"
-name.family = "Combet"
-orcid = "https://orcid.org/0000-0002-5596-198X"
+orcid = "https://orcid.org/0000-0001-6487-1866"
+internal_id = "combetc"
+name = {given = "Céline", family = "Combet"}
 
+[[technote.authors.affiliations]]
+name = "Université Grenoble Alpes, CNRS, LPSC-IN2P3"
+internal_id = "IN2P3-LPSC"
+ror = "https://ror.org/03f0apy98"
 [[technote.authors]]
-name.given = "Anthony"
-name.family = "Englert"
 internal_id = "englerta"
 orcid = "https://orcid.org/0000-0003-2314-5336"
+name = {given = "Anthony", family = "Englert"}
 [[technote.authors.affiliations]]
 name = "Brown University"
 internal_id = "Brown"
 address = "Brown University, Providence, RI 02909, USA"
+ror = "https://ror.org/05gq02987"
 
 [[technote.authors]]
-name.given = "Shenming"
-name.family = "Fu"
 internal_id = "fus"
 orcid = "https://orcid.org/0000-0001-5422-1958"
+name = {given = "Shenming", family = "Fu"}
 [[technote.authors.affiliations]]
-name = "Kavli Institute for Particle Astrophysics and Cosmology"
+name = "SLAC National Accelerator Laboratory"
 internal_id = "SLAC-Kavli"
 address = "SLAC National Accelerator Laboratory, 2575 Sand Hill Rd., Menlo Park, CA 94025, USA"
+ror = "https://ror.org/00pwqz914"
 
 [[technote.authors]]
-name.given = "Narei"
-name.family = "Lorenzo Martinez"
-internal_id = "nlorenzo"
+internal_id = "lorenzon"
 orcid = "https://orcid.org/0000-0002-7857-7606"
+name = {given = "Narei", family = "Lorenzo Martinez"}
 [[technote.authors.affiliations]]
 name = "Laboratoire d’Annecy de Physique des Particules"
 internal_id = "LAPP"
 address = "9 chemin de Bellevue, Annecy, France"
 
+[[technote.authors.affiliations]]
+name = "Université Savoie Mont-Blanc, CNRS, IN2P3-LAPP"
+internal_id = "IN2P3-LAPP"
+ror = "https://ror.org/049nhh297"
 [[technote.authors]]
-name.given = "Andrés A."
-name.family = "Plazas Malagón"
 internal_id = "plazasa"
 orcid = "https://orcid.org/0000-0002-2598-0514"
+name = {given = "Andrés A.", family = "Plazas Malagón"}
 [[technote.authors.affiliations]]
 name = "SLAC National Accelerator Laboratory"
 internal_id = "SLAC"
 address = "2575 Sand Hill Rd, Menlo Park, CA 94025, United States"
+ror = "https://ror.org/05gzmn429"
 [[technote.authors.affiliations]]
-name = "Kavli Institute For Particle Astrophysics and Cosmology"
+name = "SLAC National Accelerator Laboratory"
 internal_id = "SLAC-Kavli"
 address = "2575 Sand Hill Rd, Menlo Park, CA 94025, United States"
+ror = "https://ror.org/00pwqz914"
